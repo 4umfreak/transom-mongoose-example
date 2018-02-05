@@ -23,7 +23,7 @@ const server = transom.initialize(myApi);
 // Define a simple index route with a few endpoints
 // ****************************************************************************
 server.get('/', function(req, res, next) {
-  // Fetch the configured SMTP module from the Registry.
+
   console.log('Registry keys:', server.registry.keys);
   res.json({
     message: 'Try a few of these GET request URLs.',
