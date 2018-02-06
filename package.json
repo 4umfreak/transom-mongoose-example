@@ -23,7 +23,6 @@
     "@transomjs/transom-mongoose": "^1.1.6"
   },
   "devDependencies": {
-    "mongoose-reverse-populate": "^1.1.0",
     "node-dev": "^3.1.3"
   }
 }
