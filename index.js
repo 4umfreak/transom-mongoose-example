@@ -37,7 +37,8 @@ server.get('/', function(req, res, next) {
         'http://localhost:7090/api/v1/db/person?firstname=~K&_connect=billingaddress&_select=firstname,lastname',
         'http://localhost:7090/api/v1/db/address',
         'http://localhost:7090/api/v1/db/address/5a78e25be59fb41992e867b0',
-        'http://localhost:7090/api/v1/db/address/5938c946babe673a99ae53a3?_connect=person.billingaddress'
+        'http://localhost:7090/api/v1/db/address?_connect=person.billingaddress',
+        'http://localhost:7090/api/v1/db/address?_connect=person.billingaddress&_select=city,person_billingaddress.firstname'
       ]
   });
 });
