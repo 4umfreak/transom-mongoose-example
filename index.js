@@ -6,7 +6,9 @@ const transomMongoose = require('@transomjs/transom-mongoose');
 const transom = new Transom();
 
 // ****************************************************************************
-// This sample app doesn't use any metadata from the API definition.
+// This app uses metadata from the API definition to define Mongoose models
+// and pre-populate a local mongoose database with some seed data.
+// CRUD endpoints are created that allow a full range of I/O operations.
 // ****************************************************************************
 const myApi = require('./myApi');
 console.log('Running ' + myApi.name);
