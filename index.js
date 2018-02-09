@@ -19,43 +19,49 @@ transom.configure(transomMongoose, {
 });
 
 // Initialize my TransomJS API metadata.
-transom.initialize(myApi).then(function(server) {
-  //
+transom.initialize(myApi).then(function (server) {
 
   // ****************************************************************************
-  // Define a simple index route with a few endpoints
+  // Define a simple index route with a few cool endpoints
   // ****************************************************************************
-  server.get('/', function(req, res, next) {
-    console.log('Registry keys:', server.registry.keys);
-    res.json({
-      message: 'Try a few of these GET request URLs.',
-      'api-endpoints': [
-        'http://localhost:7090/api/v1/db/animals',
-        'http://localhost:7090/api/v1/db/animals/5a78d26d0a942611291fd1cf',
-        'http://localhost:7090/api/v1/db/person',
-        'http://localhost:7090/api/v1/db/person/5a78e25be59fb41992e867b7',
-        'http://localhost:7090/api/v1/db/person?balance=>800',
-        'http://localhost:7090/api/v1/db/person?firstname=~K',
-        'http://localhost:7090/api/v1/db/person?firstname=~K&_connect=billingaddress&_select=firstname,lastname',
-        'http://localhost:7090/api/v1/db/animals/count?species=dog',
-        'http://localhost:7090/api/v1/db/animals?species=!dog&_select=name',
-        'http://localhost:7090/api/v1/db/animals?_sort=license',
-        'http://localhost:7090/api/v1/db/animals?_sort=-license',
-        'http://localhost:7090/api/v1/db/animals?name=~Stereo',
-        'http://localhost:7090/api/v1/db/animals?name=~>Banana',
-        'http://localhost:7090/api/v1/db/address',
-        'http://localhost:7090/api/v1/db/address/5a78e25be59fb41992e867b0',
-        'http://localhost:7090/api/v1/db/address?_connect=person.billingaddress',
-        'http://localhost:7090/api/v1/db/address?_connect=person.billingaddress&_select=city,person_billingaddress.firstname',
-        'http://localhost:7090/api/v1/db/address?_connect=person.billingaddress,person.shippingaddress&_select=address_line1,city,person_billingaddress.firstname,person_shippingaddress.firstname'
-      ]
+  server.get('/', function (req, res, next) {
+    const links = [
+      '/api/v1/db/animals',
+      '/api/v1/db/animals?_skip=10&_limit=5',
+      '/api/v1/db/person',
+      '/api/v1/db/person/5a7c88ab66e2f73de0af7397',
+      '/api/v1/db/person?balance=>800',
+      '/api/v1/db/person?firstname=~K',
+      '/api/v1/db/person?firstname=~K&_connect=billingaddress&_select=firstname,lastname',
+      '/api/v1/db/animals/count?species=dog',
+      '/api/v1/db/animals?species=!dog&_select=name',
+      '/api/v1/db/animals?_sort=license',
+      '/api/v1/db/animals?_sort=-license',
+      '/api/v1/db/animals?name=~Stereo',
+      '/api/v1/db/animals?name=~>Banana',
+      '/api/v1/db/address',
+      '/api/v1/db/address/5a78e25be59fb41992e867b0',
+      '/api/v1/db/address?_connect=person.billingaddress',
+      '/api/v1/db/address?_connect=person.billingaddress&_select=city,person_billingaddress.firstname',
+      '/api/v1/db/address?_connect=person.billingaddress,person.shippingaddress&_select=address_line1,city,person_billingaddress.firstname,person_shippingaddress.firstname'
+    ];
+
+    let html = '<html><h1>Try a few of these GET request URLs.</h1>';
+    for (var i = 0; i < links.length; i++) {
+      html += `<li><a href="${links[i]}" target="_blank">${links[i]}</a></li>`;
+    }
+    html += `</html>`;
+
+    res.writeHead(200, {
+      'Content-Type': 'text/html'
     });
+    res.end(html);
   });
 
   // ****************************************************************************
   // Handle 404 errors when a route is undefined.
   // ****************************************************************************
-  server.get('.*', function(req, res, next) {
+  server.get('.*', function (req, res, next) {
     var err = new Error(req.url + ' does not exist');
     err.status = 404;
     next(err);
@@ -64,7 +70,7 @@ transom.initialize(myApi).then(function(server) {
   // ****************************************************************************
   // Handle Errors within the app as our last middleware.
   // ****************************************************************************
-  server.use(function(error, req, res, next) {
+  server.use(function (error, req, res, next) {
     console.error('Error handler', error);
     var data = {};
     data.error = error;
@@ -75,21 +81,22 @@ transom.initialize(myApi).then(function(server) {
   // ****************************************************************************
   // Start the Transom server...
   // ****************************************************************************
-  server.listen(7090, function() {
+  server.listen(7090, function () {
     console.log('%s listening at %s', server.name, server.url);
   });
+
 });
 
 // ****************************************************************************
 // Handle uncaught exceptions within your code.
 // ****************************************************************************
-process.on('uncaughtException', function(err) {
+process.on('uncaughtException', function (err) {
   console.error('Really bad Error!', err);
 });
 
 // ****************************************************************************
 // Handle uncaught rejections within your code.
 // ****************************************************************************
-process.on('unhandledRejection', function(err) {
+process.on('unhandledRejection', function (err) {
   console.error('unhandledRejection', err);
 });
