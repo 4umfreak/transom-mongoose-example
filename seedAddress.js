@@ -12,7 +12,8 @@ module.exports = {
         {
             _id : "5939a1fdbabe673a99ae53a5",
             address_line1 : "777 Fort Street",
-            city : "Vancouver"
+            city : "Vancouver",
+            country: "Canada"
         },
         {
             _id : "5938c946babe673a99ae53a3",
@@ -24,7 +25,8 @@ module.exports = {
             _id : "5939a360babe673a99ae53a6",
             city : "Calgary",
             address_line1 : "PO Box #555",
-            address_line2 : "Bay Street"
+            address_line2 : "Bay Street",
+            country: "Canada"
         }										
     ]
 };

@@ -3,7 +3,11 @@ module.exports = function() {
 	const things = ['Book', 'Slipper', 'Pencil', 'Bus', 'Chair', 'Phone'];
 	const species = ['pig', 'sheep', 'horse', 'cat', 'dog', 'chicken'];
 
-	function randomish(args) {
+	/**
+	 * Return a string built out of elements randomly selected 
+	 * from passed in Arrays. Used to make up junk data.
+	 */
+	function randomish() {
 		const result = [];
 		Array.prototype.map.call(arguments, function(arr){
 			result.push(arr[Math.floor(Math.random() * arr.length)]);

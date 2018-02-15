@@ -28,7 +28,7 @@ module.exports = {
 					city: {
 						name: "City"
 					},
-					country: "Country"
+					country: "string"
 				},
 				seed: seedAddress.data
 			},
@@ -80,9 +80,11 @@ module.exports = {
 				}
 			},			
 			Animals: {
+				audit: false,
+				csv: false,
 				attributes: {
 					name: "string",
-					license: "string",
+					license: "number",
 					species: "string"
 				},
 				seed: seedAnimal()
