@@ -29,7 +29,7 @@ transom.initialize(myApi).then(function (server) {
       '/api/v1/db/animals',
       '/api/v1/db/animals?_skip=10&_limit=5',
       '/api/v1/db/person',
-      '/api/v1/db/person/5a7c88ab66e2f73de0af7397',
+      '/api/v1/db/person/5a837e2e2c33ef01dc0deb9a',
       '/api/v1/db/person?balance=>800',
       '/api/v1/db/person?firstname=~K',
       '/api/v1/db/person?firstname=~K&_connect=billingaddress&_select=firstname,lastname',

@@ -79,7 +79,7 @@ module.exports = {
 					}
 				}
 			},			
-			animals: {
+			Animals: {
 				attributes: {
 					name: "string",
 					license: "string",
