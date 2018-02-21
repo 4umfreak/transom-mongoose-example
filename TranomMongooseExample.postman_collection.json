@@ -1,0 +1,157 @@
+{
+	"variables": [],
+	"info": {
+		"name": "TranomMongooseExample",
+		"_postman_id": "1fe133fd-e68c-8487-d67d-7a652dbb2b15",
+		"description": "Some sample requests for the transom-mongoose-example repo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET all animals",
+			"request": {
+				"url": "http://localhost:7090/api/v1/db/animals",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GET all animals with Skip and Limit",
+			"request": {
+				"url": {
+					"raw": "http://localhost:7090/api/v1/db/animals?_skip=10&_limit=5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7090",
+					"path": [
+						"api",
+						"v1",
+						"db",
+						"animals"
+					],
+					"query": [
+						{
+							"key": "_skip",
+							"value": "10",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "_limit",
+							"value": "5",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GET person query with connect address",
+			"request": {
+				"url": {
+					"raw": "http://localhost:7090/api/v1/db/person?firstname=~K&_connect=billingaddress&_select=firstname,lastname",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7090",
+					"path": [
+						"api",
+						"v1",
+						"db",
+						"person"
+					],
+					"query": [
+						{
+							"key": "firstname",
+							"value": "~K",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "_connect",
+							"value": "billingaddress",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "_select",
+							"value": "firstname,lastname",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Insert Person Sam Adams",
+			"request": {
+				"url": "http://localhost:7090/api/v1/db/person",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstname\": \"Sam\",\n\t\"lastname\": \"Adams\",\n\t\"balance\": 881,\n\t\"billingaddress\": \"5939a360babe673a99ae53a6\",\n    \"shippingaddress\": \"5938c9c8babe673a99ae53a4\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GET person by id",
+			"request": {
+				"url": "http://localhost:7090/api/v1/db/person/5a837e2e2c33ef01dc0deb9d",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE person by id",
+			"request": {
+				"url": "http://localhost:7090/api/v1/db/person/5a837e2e2c33ef01dc0deb9d",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"lastname\": \"Peterson\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

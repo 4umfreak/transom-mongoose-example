@@ -35,6 +35,7 @@ module.exports = {
 			person: {
 				seed: seedPerson.data,
 				acl: false,
+				audit: false,
 				attributes: {
 					lastname: {
 						order: 200,
