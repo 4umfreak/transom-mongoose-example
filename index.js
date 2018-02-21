@@ -50,12 +50,37 @@ transom.initialize(myApi).then(function (server) {
     for (var i = 0; i < links.length; i++) {
       html += `<li><a href="${links[i]}" target="_blank">${links[i]}</a></li>`;
     }
+   
+    html += `<br />You can also try this hand-hacked route:`;
+    html += `<li><a href="${'/groupBySpecies'}" target="_blank">${'/groupBySpecies'}</a></li>`;
+    
     html += `</html>`;
 
     res.writeHead(200, {
       'Content-Type': 'text/html'
     });
     res.end(html);
+
+    console.log(server.router.mounts);
+    
+  });
+
+  server.get('groupBySpecies', function (req, res, next) {
+    const mongoose = server.registry.get('mongoose');
+    const Animals = mongoose.model('dynamic-animals')
+    Animals.find({}, function (err, items) {
+      if (err) {
+        return next(err);
+      }
+      const result = {};
+      for (var animal of items) {
+        if (!result[animal.species]) {
+          result[animal.species] = [];
+        }
+        result[animal.species].push(animal);
+      }
+      res.send(result);
+    });
   });
 
   // ****************************************************************************
