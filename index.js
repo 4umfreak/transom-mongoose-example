@@ -1,9 +1,10 @@
 'use strict';
-
 const Transom = require('@transomjs/transom-core');
 const transomMongoose = require('@transomjs/transom-mongoose');
 
 const transom = new Transom();
+const restify = require('restify');
+const restifyErrors = require('restify-errors');
 
 // ****************************************************************************
 // This app uses metadata from the API definition to define Mongoose models
@@ -13,13 +14,29 @@ const transom = new Transom();
 const myApi = require('./myApi');
 console.log('Running ' + myApi.name);
 
+const server = restify.createServer();
+
+// My custom middleware
+function isValidUser(req, res, next) {
+  // Delayed resolution of the middleware.
+  if (server.registry.has('localUserMiddleware')) {
+    const middleware = server.registry.get('localUserMiddleware');
+    middleware.isLoggedInMiddleware()(req, res, next);
+  } else {
+    // next(new restifyErrors.ForbiddenError(`Server configuration error, 'localUserMiddleware' not found.`));
+    console.log('Fetching data without User verification!');
+    next();
+  }
+}
+
 // Register my TransomJS Mongoose module.
 transom.configure(transomMongoose, {
-  mongodbUri: 'mongodb://localhost/example-app'
+  mongodbUri: 'mongodb://localhost/example-app',
+  preMiddleware: [ isValidUser ]
 });
 
 // Initialize my TransomJS API metadata.
-transom.initialize(myApi).then(function (server) {
+transom.initialize(server, myApi).then(function (server) {
 
   // ****************************************************************************
   // Define a simple index route with a few cool endpoints

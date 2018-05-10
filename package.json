@@ -20,10 +20,10 @@
   "license": "MIT",
   "dependencies": {
     "@transomjs/transom-core": "^1.0.4",
-    "@transomjs/transom-mongoose": "^1.1.6"
+    "@transomjs/transom-mongoose": "^1.4.3"
   },
   "devDependencies": {
-    "cross-env": "^5.1.3",
+    "cross-env": "^5.1.5",
     "node-dev": "^3.1.3"
   }
 }
