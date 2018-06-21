@@ -1,10 +1,12 @@
 'use strict';
+const opn = require('opn');
 const Transom = require('@transomjs/transom-core');
 const transomMongoose = require('@transomjs/transom-mongoose');
 
 const transom = new Transom();
-const restify = require('restify');
-const restifyErrors = require('restify-errors');
+
+// const restify = require('restify');
+// const restifyErrors = require('restify-errors');
 
 // ****************************************************************************
 // This app uses metadata from the API definition to define Mongoose models
@@ -14,16 +16,15 @@ const restifyErrors = require('restify-errors');
 const myApi = require('./myApi');
 console.log('Running ' + myApi.name);
 
-const server = restify.createServer();
+// const server = restify.createServer();
 
 // My custom middleware
 function isValidUser(req, res, next) {
   // Delayed resolution of the middleware.
-  if (server.registry.has('localUserMiddleware')) {
+  if (transom.registry.has('localUserMiddleware')) {
     const middleware = server.registry.get('localUserMiddleware');
     middleware.isLoggedInMiddleware()(req, res, next);
   } else {
-    // next(new restifyErrors.ForbiddenError(`Server configuration error, 'localUserMiddleware' not found.`));
     console.log('Fetching data without User verification!');
     next();
   }
@@ -36,7 +37,7 @@ transom.configure(transomMongoose, {
 });
 
 // Initialize my TransomJS API metadata.
-transom.initialize(server, myApi).then(function (server) {
+transom.initialize(myApi).then(function (server) {
 
   // ****************************************************************************
   // Define a simple index route with a few cool endpoints
@@ -77,9 +78,6 @@ transom.initialize(server, myApi).then(function (server) {
       'Content-Type': 'text/html'
     });
     res.end(html);
-
-    console.log(server.router.mounts);
-    
   });
 
   server.get('groupBySpecies', function (req, res, next) {
@@ -124,7 +122,9 @@ transom.initialize(server, myApi).then(function (server) {
   // Start the Transom server...
   // ****************************************************************************
   server.listen(7090, function () {
+    console.log(server.router.mounts);
     console.log('%s listening at %s', server.name, server.url);
+    opn(server.url);
   });
 
 });
