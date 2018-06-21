@@ -5,9 +5,6 @@ const transomMongoose = require('@transomjs/transom-mongoose');
 
 const transom = new Transom();
 
-// const restify = require('restify');
-// const restifyErrors = require('restify-errors');
-
 // ****************************************************************************
 // This app uses metadata from the API definition to define Mongoose models
 // and pre-populate a local mongoose database with some seed data.
@@ -15,8 +12,6 @@ const transom = new Transom();
 // ****************************************************************************
 const myApi = require('./myApi');
 console.log('Running ' + myApi.name);
-
-// const server = restify.createServer();
 
 // My custom middleware
 function isValidUser(req, res, next) {
