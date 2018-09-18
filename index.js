@@ -47,7 +47,7 @@ transom.initialize(myApi).then(function (server) {
       '/api/v1/db/person?firstname=~K',
       '/api/v1/db/person?firstname=~K&_connect=billingaddress&_select=firstname,lastname',
       '/api/v1/db/animals/count?species=dog',
-      '/api/v1/db/animals?species=!dog&_select=name',
+      '/api/v1/db/animals?species=!dog&_select=name,species',
       '/api/v1/db/animals?_sort=license',
       '/api/v1/db/animals?_sort=-license',
       '/api/v1/db/animals?name=~Stereo',
@@ -75,7 +75,7 @@ transom.initialize(myApi).then(function (server) {
     res.end(html);
   });
 
-  server.get('groupBySpecies', function (req, res, next) {
+  server.get('/groupBySpecies', function (req, res, next) {
     const mongoose = server.registry.get('mongoose');
     const Animals = mongoose.model('dynamic-animals')
     Animals.find({}, function (err, items) {
@@ -96,7 +96,7 @@ transom.initialize(myApi).then(function (server) {
   // ****************************************************************************
   // Handle 404 errors when a route is undefined.
   // ****************************************************************************
-  server.get('.*', function (req, res, next) {
+  server.get('*', function (req, res, next) {
     var err = new Error(req.url + ' does not exist');
     err.status = 404;
     next(err);

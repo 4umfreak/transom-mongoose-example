@@ -19,8 +19,8 @@
   "author": "Mark Voorberg <4umfreak@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@transomjs/transom-core": "^1.0.8",
-    "@transomjs/transom-mongoose": "^1.5.7",
+    "@transomjs/transom-core": "^1.1.0",
+    "@transomjs/transom-mongoose": "^1.8.0-0",
     "opn": "^5.3.0"
   },
   "devDependencies": {
