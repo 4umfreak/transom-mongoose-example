@@ -13,16 +13,9 @@ const transom = new Transom();
 const myApi = require('./myApi');
 console.log('Running ' + myApi.name);
 
-// My custom middleware
 function isValidUser(req, res, next) {
-  // Delayed resolution of the middleware.
-  if (transom.registry.has('localUserMiddleware')) {
-    const middleware = server.registry.get('localUserMiddleware');
-    middleware.isLoggedInMiddleware()(req, res, next);
-  } else {
-    console.log('Fetching data without User verification!');
-    next();
-  }
+  // Everybody can do everything.
+  next();
 }
 
 // Register my TransomJS Mongoose module.
@@ -41,6 +34,7 @@ transom.initialize(myApi).then(function (server) {
     const links = [
       '/api/v1/db/animals',
       '/api/v1/db/animals?_skip=10&_limit=5',
+      '/api/v1/db/animals?_select=name&_sort=name&name=~>a',
       '/api/v1/db/person',
       '/api/v1/db/person/5a837e2e2c33ef01dc0deb9a',
       '/api/v1/db/person?balance=>800',
@@ -117,7 +111,13 @@ transom.initialize(myApi).then(function (server) {
   // Start the Transom server...
   // ****************************************************************************
   server.listen(7090, function () {
-    console.log(server.router.mounts);
+    const routes = server.restify.router.getRoutes();
+    for (let key in routes) {
+      const route = routes[key];
+      console.log(`${route.method}\t`, route.path);
+    }
+
+    // console.log(server.router.mounts);
     console.log('%s listening at %s', server.name, server.url);
     opn(server.url);
   });

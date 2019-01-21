@@ -17,8 +17,13 @@ module.exports = function() {
 
 	const animals = [];
 	for (var i=0; i < 1200; i++) {
+		let randName = randomish(fruit, things);
+		if (i%2 === 0) {
+			// Used to demo sorting of mixed case results.
+			randName = randName.toLowerCase();
+		}
 		animals.push({
-			name: randomish(fruit, things),
+			name: randName,
 			species: randomish(species),
 			license: i + 1000
 		});
