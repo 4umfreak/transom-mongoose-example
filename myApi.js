@@ -70,14 +70,18 @@ module.exports = {
 						billingaddress: {
 							name: "Billing Address",
 							required: false,
-							type: "connector",
-							connect_entity: "address"
+							type: "objectid",
+							ref: "address"
 						},
 						shippingaddress: {
 							name: "Shipping Address",
 							required: false,
-							connect_entity: "address",
-							type: "connector"
+							type: "objectid",
+							ref: "address"
+						},
+						addresses: {
+							type: ['objectid'],
+							ref: 'address'
 						}
 					}
 				},			

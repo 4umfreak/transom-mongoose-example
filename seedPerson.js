@@ -7,6 +7,7 @@ module.exports = {
             balance: 456,
             billingaddress: "5939a360babe673a99ae53a6",
             shippingaddress: "5938c946babe673a99ae53a3",
+            addresses: ["5939a360babe673a99ae53a6", "5938c946babe673a99ae53a3"]
         },
         {
             _id: "5a837e2e2c33ef01dc0deb9a",
@@ -15,6 +16,7 @@ module.exports = {
             balance: 785,
             billingaddress: "5939a1fdbabe673a99ae53a5",
             shippingaddress: "5938c946babe673a99ae53a3",
+            addresses: ["5939a1fdbabe673a99ae53a5", "5938c946babe673a99ae53a3"]
         },
         {
             _id: "5a837e2e2c33ef01dc0deb9b",
@@ -23,6 +25,7 @@ module.exports = {
             balance: 216,
             billingaddress: "5938c9c8babe673a99ae53a4",
             shippingaddress: "5938c946babe673a99ae53a3",
+            addresses: ["5938c9c8babe673a99ae53a4", "5938c946babe673a99ae53a3"]
         },
         {
             _id: "5a837e2e2c33ef01dc0deb9c",
@@ -31,6 +34,7 @@ module.exports = {
             balance: 881,
             billingaddress: "5939a360babe673a99ae53a6",
             shippingaddress: "5938c9c8babe673a99ae53a4",
+            addresses: ["5939a360babe673a99ae53a6", "5938c9c8babe673a99ae53a4"]
         },
         {
             _id: "5a837e2e2c33ef01dc0deb9d",
@@ -39,6 +43,7 @@ module.exports = {
             balance: 925,
             billingaddress: "5938c946babe673a99ae53a3",
             shippingaddress: "5938c946babe673a99ae53a3",
+            addresses: ["5938c946babe673a99ae53a3", "5938c946babe673a99ae53a3", "000000000000000000000001"]
         },
     ]
 };
