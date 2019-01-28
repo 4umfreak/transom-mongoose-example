@@ -8,8 +8,18 @@ module.exports = {
 	transom: {},
 	definition: {
 		mongoose: {
+/*
+This works great. My collations below are not. Wth?
+db.getCollection('address').find({}, {city: 1}).sort({city: 1}).collation({locale: 'en', caseFirst: 'lower', caseLevel: true})
+*/
+			collations: {
+				default: { locale: 'simple' }, // A-Z, a-z
+				usorted: { locale: 'en', caseFirst: 'upper', caseLevel: true }, // A,a - Z,z
+				lsorted: { locale: 'en', caseFirst: 'lower', caseLevel: true } // a,A - z,Z
+			  },		
 			entities: {
 				address: {
+					collation: 'lsorted',
 					acl: false,
 					attributes: {
 						address_line1: {
@@ -34,6 +44,7 @@ module.exports = {
 					seed: seedAddress.data
 				},
 				person: {
+					collation: 'default',
 					seed: seedPerson.data,
 					acl: false,
 					audit: false,
